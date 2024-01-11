@@ -15,30 +15,66 @@
 <body>
 
 <div id="video-container">
-  <video id="myVideo" width="100%" controls>
+  <video id="myVideo" width="100%" controls controlsList="nodownload">
     <source src="https://archive.org/download/001-what-youll-get-in-this-course/001%20What%20You%27ll%20Get%20In%20This%20Course.mp4" type="video/mp4">
-    <track label="English" kind="subtitles" srclang="en" src="https://archive.org/download/vedio_202401/vedio.vtt" default>
+    <track label="English" kind="subtitles" srclang="en" src="proxy.php" default>
     Your browser does not support the video tag.
   </video>
 </div>
 
 <script>
   var video = document.getElementById('myVideo');
-  var subtitles = video.textTracks[0];
 
-  function toggleSubtitles() {
-    if (subtitles.mode == 'showing') {
-      subtitles.mode = 'hidden';
-    } else {
-      subtitles.mode = 'showing';
+  function handleKeyPress(event) {
+    switch (event.key) {
+      case ' ':
+        togglePlayPause();
+        break;
+      case 'ArrowLeft':
+        rewind();
+        break;
+      case 'ArrowRight':
+        fastForward();
+        break;
+      case 'ArrowUp':
+        increaseVolume();
+        break;
+      case 'ArrowDown':
+        decreaseVolume();
+        break;
     }
   }
 
-  // Listen for the 'loadedmetadata' event to ensure that the textTracks are available
-  video.addEventListener('loadedmetadata', function() {
-    // Show subtitles by default
-    subtitles.mode = 'showing';
-  });
+  function togglePlayPause() {
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  }
+
+  function rewind() {
+    video.currentTime -= 5; // Rewind 5 seconds
+  }
+
+  function fastForward() {
+    video.currentTime += 5; // Fast forward 5 seconds
+  }
+
+  function increaseVolume() {
+    if (video.volume < 1) {
+      video.volume += 0.1; // Increase volume by 10%
+    }
+  }
+
+  function decreaseVolume() {
+    if (video.volume > 0) {
+      video.volume -= 0.1; // Decrease volume by 10%
+    }
+  }
+
+  // Attach the keypress event listener to the document
+  document.addEventListener('keypress', handleKeyPress);
 
 </script>
 
