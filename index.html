@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Video Media Player</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="#" />
+  <title>HTML Media Player with Subtitles</title>
+  <style>
+    #video-container {
+      max-width: 600px;
+      margin: 20px auto;
+    }
+  </style>
 </head>
 <body>
-    <div id="app" class="video-container">
-        <video id="videoPlayer" class="video" controls>
-            <!-- Add your video source here -->
-            <source src="https://ia601301.us.archive.org/30/items/0107_20240106/0107.mp4" type="video/mp4">
-            
-            <!-- Subtitle options -->
-            <track kind="subtitles" src="https://raw.githubusercontent.com/med56524755/test/main/med.srt" srclang="ar" label="Arabic" default>
-            <track kind="subtitles" src="https://raw.githubusercontent.com/med56524755/test/main/med.srt" srclang="en" label="English">
-        </video>
 
-        <div id="subtitleOptions" class="subtitle-options">
-            <!-- Display selected subtitle -->
-            Selected Subtitle: <span id="selectedSubtitle">Arabic</span>
-        </div>
-    </div>
+<div id="video-container">
+  <video id="myVideo" width="100%" controls>
+    <source src="https://archive.org/download/001-what-youll-get-in-this-course/001%20What%20You%27ll%20Get%20In%20This%20Course.mp4" type="video/mp4">
+    <track label="English" kind="subtitles" srclang="en" src="https://archive.org/download/vedio_202401/vedio.vtt" default>
+    Your browser does not support the video tag.
+  </video>
+</div>
 
-    <script src="main.js"></script>
+<script>
+  var video = document.getElementById('myVideo');
+  var subtitles = video.textTracks[0];
+
+  function toggleSubtitles() {
+    if (subtitles.mode == 'showing') {
+      subtitles.mode = 'hidden';
+    } else {
+      subtitles.mode = 'showing';
+    }
+  }
+
+  // Listen for the 'loadedmetadata' event to ensure that the textTracks are available
+  video.addEventListener('loadedmetadata', function() {
+    // Show subtitles by default
+    subtitles.mode = 'showing';
+  });
+
+</script>
+
 </body>
 </html>
