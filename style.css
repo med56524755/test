@@ -15,15 +15,21 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    scroll-behavior: smooth;
 }
 
 a {
     text-decoration: none;
+    color: #fe9a0f;
 }
 
 a:hover {
     text-decoration: underline;
-    color: #fe9a0f
+}
+
+/* Style for colored letters in H1 (G and H in Gift Hub) */
+.colored-letter {
+    color: #fe9a0f; /* Your brand orange color */
 }
 
 .container {
@@ -72,6 +78,7 @@ nav a {
 nav a:hover {
     text-decoration: none;
     background-color: #ddd;
+    color: #fe9a0f; /* Keep orange color on hover for nav links */
 }
 
 /* Hero Section */
@@ -141,12 +148,10 @@ nav a:hover {
 }
 
 .gift-card .price {
-    font-weight: bold;
-    color: #333;
-}
-
-.gift-card .discount {
-    color: #008000;
+    font-weight: bolder; /* Make it even bolder */
+    font-size: 1.4em;    /* Increase the font size (adjust as needed) */
+    color: #222;         /* Slightly darker text color (adjust as needed - could try #000 for black if you want it very strong) */
+    text-shadow: 1px 1px 0px rgba(200, 200, 200, 0.3); /* Add a subtle text shadow for depth */
 }
 
 /* WhatsApp Button */
@@ -164,7 +169,29 @@ nav a:hover {
     background-color: #128C7E;
     text-decoration: none;
 }
+/* Facebook Share Button */
+.facebook-share-button {
+    display: inline-flex; /* Use inline-flex to align icon and text */
+    align-items: center; /* Vertically align icon and text */
+    padding: 10px 20px;
+    background-color: #1877F2; /* Facebook Blue Color */
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Add some space above the button */
+    text-decoration: none; /* Remove underline from link */
+}
 
+.facebook-share-button:hover {
+    background-color: #0d4da4; /* Darker Facebook Blue on hover */
+    text-decoration: none; /* Remove underline on hover */
+}
+
+.facebook-share-button i {
+    margin-right: 8px; /* Space between icon and text */
+    font-size: 1.2em; /* Adjust icon size if needed */
+}
 /* Footer */
 footer {
     background-color: #151414;
@@ -337,6 +364,7 @@ main {
 
     .nav-open .hamburger {
         transform: rotate(45deg);
+        background-color: #fe9a0f; /* keep hamburger orange when nav open */
     }
 
     .nav-open .hamburger::before {
@@ -345,5 +373,70 @@ main {
 
     .nav-open .hamburger::after {
         transform: translateY(-8px) rotate(-90deg);
+    }
+}
+
+.whatsapp-button:hover {
+    background-color: #128C7E; /* Darker WhatsApp Green on hover */
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(37, 211, 102, 0.8); /* Green glow on hover */
+}
+.gift-card:hover {
+    box-shadow: 0 0 15px rgba(255, 154, 15, 0.3); /* Very faint orange glow on card hover */
+    transform: translateY(-3px); /* Slightly lift the card on hover for a subtle effect */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.gift-card {
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Add transition to the normal state too for smooth return */
+}
+#hero h2, #hero p {
+    opacity: 0; /* Initially hidden */
+    animation: fadeIn 1s ease-out 0.3s forwards; /* Fade in animation */
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; } /* Fade to fully visible */
+}
+
+
+/* Scroll-Triggered Section Animations */
+
+section { /* Target all sections */
+    opacity: 0; /* Initially hidden */
+    transform: translateY(50px); /* Initially moved slightly to the left */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smooth transition for animation */
+}
+
+section.slide-from-left {
+    opacity: 1; /* Fade in and slide into view */
+    transform: translateX(0); /* Slide to its normal position */
+}
+
+section.slide-from-right {
+    opacity: 1; /* Fade in and slide into view */
+    transform: translateX(0); /* Slide to its normal position */
+}
+
+
+@keyframes slideInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
