@@ -153,45 +153,25 @@ nav a:hover {
     color: #222;         /* Slightly darker text color (adjust as needed - could try #000 for black if you want it very strong) */
     text-shadow: 1px 1px 0px rgba(200, 200, 200, 0.3); /* Add a subtle text shadow for depth */
 }
-
-/* WhatsApp Button */
-.whatsapp-button {
+/* Messenger Button */
+.messenger-button {
     display: inline-block;
     padding: 12px 25px;
-    background-color: #25D366;
+    background-color: #0078FF; /* Messenger Blue */
     color: #fff;
     border-radius: 5px;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Keep box-shadow transition if you like it */
+    box-shadow: 0 0 5px rgba(0, 120, 255, 0.5); /* Subtle Blue Shadow (adjust if needed) */
+    text-decoration: none; /* Remove underline */
 }
 
-.whatsapp-button:hover {
-    background-color: #128C7E;
-    text-decoration: none;
-}
-/* Facebook Share Button */
-.facebook-share-button {
-    display: inline-flex; /* Use inline-flex to align icon and text */
-    align-items: center; /* Vertically align icon and text */
-    padding: 10px 20px;
-    background-color: #1877F2; /* Facebook Blue Color */
-    color: #fff;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    margin-top: 10px; /* Add some space above the button */
-    text-decoration: none; /* Remove underline from link */
-}
-
-.facebook-share-button:hover {
-    background-color: #0d4da4; /* Darker Facebook Blue on hover */
+.messenger-button:hover {
+    background-color: #005bb8; /* Darker Messenger Blue on hover */
     text-decoration: none; /* Remove underline on hover */
+    box-shadow: 0 0 10px rgba(0, 120, 255, 0.7); /* Blue glow on hover (adjust if needed) */
 }
 
-.facebook-share-button i {
-    margin-right: 8px; /* Space between icon and text */
-    font-size: 1.2em; /* Adjust icon size if needed */
-}
 /* Footer */
 footer {
     background-color: #151414;

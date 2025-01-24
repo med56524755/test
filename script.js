@@ -32,20 +32,30 @@
     window.addEventListener('scroll', checkSlide);
     checkSlide();
 
-    function initializeFacebookShareButtons() {
+    // Messenger Order Buttons - NO COUPON CODE
+    function initializeMessengerOrderButtons() {
         const giftCards = document.querySelectorAll('.gift-card');
 
         giftCards.forEach(card => {
-            const shareButton = card.querySelector('.facebook-share-button');
-            const giftCardTitle = card.querySelector('h3').textContent; // Get gift card title
+            const messengerButton = card.querySelector('.messenger-button');
+            const giftCardTitle = card.querySelector('h3').textContent;
 
-            if (shareButton) {
-                const websiteURL = window.location.href.split('#')[0]; // Get current website URL (without hash)
-                const shareURL = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(websiteURL)}"e=${encodeURIComponent(`Check out this gift card: ${giftCardTitle} at Gift Hub!`)}`; // Construct Facebook Share URL
+            if (messengerButton) {
+                messengerButton.addEventListener('click', (event) => {
+                    event.preventDefault();
 
-                shareButton.href = shareURL; // Set the href of the share button
+                    const facebookPageUsername = "GiftHubTN";
+                    const prefilledMessage = `Hello,%20I%20would%20like%20to%20order%20the%20gift_card:%20${encodeURIComponent(giftCardTitle)}%20from%20Gift_Hub_website.`;
+
+                    const messengerURL = `https://m.me/${facebookPageUsername}?text=${prefilledMessage}`;
+
+                    window.open(messengerURL, '_blank');
+                });
+            } else {
+                console.warn("Messenger Button not found in Gift Card:", giftCardTitle); // Simplified warning
             }
         });
     }
 
-    initializeFacebookShareButtons(); // Call the function to initialize share buttons on page load
+    initializeMessengerOrderButtons();
+
