@@ -7,6 +7,10 @@
     padding: 0;
 }
 
+main {
+    flex: 1;
+}
+
 body {
     font-family: 'DM Sans', sans-serif;
     line-height: 1.6;
@@ -40,7 +44,7 @@ a:hover {
 
 /* Header */
 header {
-    background-color: #f3eeee;
+    background-color: #ffffff;
     padding: 15px 0;
     border-bottom: 1px solid #ddd;
     position: relative; /* Important for positioning nav-toggle */
@@ -78,28 +82,51 @@ nav a {
 nav a:hover {
     text-decoration: none;
     background-color: #ddd;
-    color: #fe9a0f; /* Keep orange color on hover for nav links */
 }
 
-/* Hero Section */
+/* Hero Section - Visually Improved based on Screenshot */
 #hero {
-    background-color: #f5f0f0;
-    padding: 60px 0;
-    text-align: center;
+    background-color: #fdf5e6; /* Light Beige/Cream Background (similar to screenshot) */ /* NEW Background Color */
+    padding: 80px 0; /* Increased padding for more visual space */         /* NEW Padding */
+    text-align: left; /* Align text to the left */                         /* NEW Text Alignment */
+}
+
+#hero .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
 }
 
 #hero h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #151414;
+    font-size: 3.0em; /* Increased font size for heading */             /* NEW Font Size */
+    margin-bottom: 25px; /* Adjusted margin below heading */           /* NEW Margin-bottom */
+    color: #151414; /* Keep --night color for heading text */
+    font-weight: 700; /* Make heading bolder */                        /* NEW Font Weight */
+    line-height: 1.2; /* Improved line height for heading */            /* NEW Line Height */
 }
 
 #hero p {
     font-size: 1.1em;
-    color: #333;
-    max-width: 700px;
-    margin: 0 auto;
+    color: #444; /* Slightly darker paragraph text */                    /* NEW Text Color - Slightly darker */
+    max-width: 600px; /* Reduced max-width for paragraph text */        /* NEW Max-width */
+    margin: 0; /* Reset default paragraph margins */                     /* NEW Reset Margins */
 }
+
+#hero .hero-image {
+    width: 45%; /* Slightly wider image container */                     /* NEW Width - Slightly wider */
+    max-width: 600px; /* Increased max-width for image */                /* NEW Max-width - Increased */
+    text-align: right;
+}
+
+#hero .hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Slightly more rounded corners for image */     /* NEW - More Rounded Corners */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */ /* NEW - Stronger Shadow */
+}
+
+
 
 /* Gift Card Catalogue */
 #gift-card-catalogue {
@@ -142,6 +169,17 @@ nav a:hover {
     color: #151414;
 }
 
+/* Gift Card Title Link Styling */
+.gift-card-link {
+    text-decoration: none; /* Remove default link underline */
+    color: inherit; /* Inherit color from parent (<h3> color) */
+    display: block; /* Make link a block-level element to fill the h3 area */
+}
+
+.gift-card-link:hover {
+    text-decoration: underline; /* Add underline on hover to indicate it's a link */
+    color: inherit; /* Keep inherited color on hover */
+}
 .gift-card .description, .gift-card .price, .gift-card .discount {
     margin-bottom: 8px;
     color: #555;
@@ -171,6 +209,24 @@ nav a:hover {
     text-decoration: none; /* Remove underline on hover */
     box-shadow: 0 0 10px rgba(0, 120, 255, 0.7); /* Blue glow on hover (adjust if needed) */
 }
+.gift-card:hover {
+    box-shadow: 0 0 15px rgba(255, 154, 15, 0.3); /* Very faint orange glow on card hover */
+    transform: translateY(-3px); /* Slightly lift the card on hover for a subtle effect */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.gift-card {
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Add transition to the normal state too for smooth return */
+}
+#hero h2, #hero p {
+    opacity: 0; /* Initially hidden */
+    animation: fadeIn 1s ease-out 0.3s forwards; /* Fade in animation */
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; } /* Fade to fully visible */
+}
+
 
 /* Footer */
 footer {
@@ -181,19 +237,45 @@ footer {
     font-size: 0.9em;
 }
 
-/* Placeholder Image Style */
-.gift-card-image[src="placeholder-giftcard.png"] {
-    background-color: #eee;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2em;
-    color: #888;
+/* Scroll-Triggered Section Animations */
+
+section { /* Target all sections */
+    opacity: 0; /* Initially hidden */
+    transform: translateY(50px); /* Initially moved slightly to the left */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smooth transition for animation */
 }
 
-main {
-    flex: 1;
+section.slide-from-left {
+    opacity: 1; /* Fade in and slide into view */
+    transform: translateX(0); /* Slide to its normal position */
+}
+
+section.slide-from-right {
+    opacity: 1; /* Fade in and slide into view */
+    transform: translateX(0); /* Slide to its normal position */
+}
+
+
+@keyframes slideInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Mobile Styles and Navigation Toggle */
@@ -302,6 +384,18 @@ main {
     #hero p {
         font-size: 1em;
     }
+    #hero .container {
+        flex-direction: column; /* Stack content vertically on mobile */
+        text-align: center; /* Center align text on mobile */
+    }
+
+    #hero .hero-content {
+        padding-right: 0; /* Reset right padding for text on mobile */
+    }
+
+    #hero .hero-image {
+        display: none; /* Hide hero image on mobile screens */
+    }
 
     #gift-card-catalogue {
         padding: 30px 0;
@@ -356,67 +450,3 @@ main {
     }
 }
 
-.whatsapp-button:hover {
-    background-color: #128C7E; /* Darker WhatsApp Green on hover */
-    text-decoration: none;
-    box-shadow: 0 0 10px rgba(37, 211, 102, 0.8); /* Green glow on hover */
-}
-.gift-card:hover {
-    box-shadow: 0 0 15px rgba(255, 154, 15, 0.3); /* Very faint orange glow on card hover */
-    transform: translateY(-3px); /* Slightly lift the card on hover for a subtle effect */
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
-}
-
-.gift-card {
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Add transition to the normal state too for smooth return */
-}
-#hero h2, #hero p {
-    opacity: 0; /* Initially hidden */
-    animation: fadeIn 1s ease-out 0.3s forwards; /* Fade in animation */
-}
-
-@keyframes fadeIn {
-    to { opacity: 1; } /* Fade to fully visible */
-}
-
-
-/* Scroll-Triggered Section Animations */
-
-section { /* Target all sections */
-    opacity: 0; /* Initially hidden */
-    transform: translateY(50px); /* Initially moved slightly to the left */
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smooth transition for animation */
-}
-
-section.slide-from-left {
-    opacity: 1; /* Fade in and slide into view */
-    transform: translateX(0); /* Slide to its normal position */
-}
-
-section.slide-from-right {
-    opacity: 1; /* Fade in and slide into view */
-    transform: translateX(0); /* Slide to its normal position */
-}
-
-
-@keyframes slideInFromLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-100px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInFromRight {
-    0% {
-        opacity: 0;
-        transform: translateX(100px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
